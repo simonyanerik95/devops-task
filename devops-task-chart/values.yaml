@@ -1,0 +1,30 @@
+replicaCount: 1
+image:
+  repository: 10.99.75.183/devops-app
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  name: my-node-app
+  type: ClusterIP
+  port: 80
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: my-node-app.example.com
+      paths:
+        - /
+  pathType: Prefix
+  tls: []
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+namespace: devops

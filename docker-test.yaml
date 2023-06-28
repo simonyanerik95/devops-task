@@ -1,0 +1,12 @@
+schemaVersion: 2.0.0
+containers:
+  - name: my-app
+    image: 10.108.70.20/devops-app:latest
+    command: npm start
+    tests:
+      - exec: npm --version
+        expectedOutput: "6.14.8"
+      - exec: node --version
+        expectedOutput: "14.17.5"
+      - exec: curl http://localhost:3000
+        expectedOutput: "Welcome to my app"
